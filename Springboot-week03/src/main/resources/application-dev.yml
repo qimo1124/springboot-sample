@@ -1,0 +1,33 @@
+server:
+  port: 8081
+  servlet:
+    #
+    context-path: /api
+
+spring:
+  application:
+    name: springboot-week03
+
+
+# 自定义配置
+app:
+  app-name: 企业管理项目
+  version: 2.0.0
+  description: Spring Boot 3.5.11实战项目
+#  envs: [ "dev","test","pord" ]
+#  author:
+#    name: mqxu
+#    website: https://mqxu.top
+#    email: 16422802@qq.com
+#    #配置数值型和布尔，有具体含义
+#    tokens: 2000
+#    enabled:
+
+sms:
+  ccp:
+    serverIp: "app.cloopen.com"
+    port: "8883"
+    accountSID: "2c94811c9ac8c114019d060ead9130ad"
+    accountToken: "a93bd06fefa24b9ba60ed112b3fb75be"
+    appId: "2c94811c9ac8c114019d060eae0430b4"
+    templateId: "1"
