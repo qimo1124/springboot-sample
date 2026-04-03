@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.dingyy.week05.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="top.dingyy.week05.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="age" property="age"/>
+        <result column="email" property="email"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 插入 - 注意：列名用数据库的 username，参数用实体类的 userName -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user(username, password, age, email, create_time)
+        VALUES (#{userName}, #{password}, #{age}, #{email}, #{createTime})
+    </insert>
+
+    <!-- 根据ID查询 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT * FROM t_user WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT * FROM t_user ORDER BY id
+    </select>
+
+    <!-- 更新 -->
+    <update id="updateByPrimaryKey">
+        UPDATE t_user
+        SET username = #{userName},
+            password = #{password},
+            age = #{age},
+            email = #{email},
+            create_time = #{createTime}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM t_user WHERE id = #{id}
+    </delete>
+
+    <!-- 条件查询 -->
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="top.dingyy.week05.entity.User">
+        SELECT * FROM t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                AND username LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="age != null">
+                AND age >= #{age}
+            </if>
+        </where>
+        ORDER BY id
+    </select>
+
+</mapper>
